@@ -88,7 +88,9 @@ docker-compose up -d
 
 ### Συνεισφέροντες
 
-Ιδιαίτερες ευχαριστίες σε [όλους τους συνεισφέροντες](https://github.com/adreaskar/javascript.gr/graphs/contributors).
+<a href="https://github.com/adreaskar/javascript.gr/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=adreaskar/javascript.gr" />
+</a>
 
 ## Υποστήριξη
 
