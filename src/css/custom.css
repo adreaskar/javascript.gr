@@ -113,10 +113,29 @@ h3 {
     display: none;
 }
 
+/* Custom div to display youtube channels */
+#youtube-channels {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.custom-iframe {
+    width: 370px;
+    height: 208px;
+}
+
 /* Media queries */
 @media screen and (min-width: 1024px) {
     .docs-doc-page .container {
         padding-top: 2rem !important;
         padding-left: 5rem;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    #youtube-channels {
+        flex-direction: column;
     }
 }

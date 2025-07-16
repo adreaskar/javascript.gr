@@ -1,3 +1,5 @@
+## Βιβλία και οδηγοί
+
 Παρακάτω υπάρχουν μερικά χρήσιμα links για την JavaScript αλλά και γενικότερα για Web Development.
 
 Ο οδηγός αυτός έχει βασιστεί σε μεγάλο βαθμό σε αυτές τις πηγές.
@@ -10,3 +12,48 @@
 -   [Optimizing Javascript](https://romgrk.com/posts/optimizing-javascript)
 -   [JavaScript Roadmap](https://roadmap.sh/javascript)
 -   [The Frontend Developer Handbook](https://frontendmasters.com/guides/front-end-handbook/2024/)
+
+## Κανάλια στο YouTube
+
+Κανάλια στα Ελληνικά που ενισχύουν την εκμάθηση της JavaScript:
+
+
+<div id="youtube-channels">
+
+<div>
+### [Δημήτρης Ψούνης](https://www.youtube.com/@psounis)
+
+<iframe class="custom-iframe" src="https://www.youtube.com/embed/videoseries?si=lPAg68yt1PrJrQRU&amp;list=PLLMmbOLFy25Hl53Qju9zzG2DpglBp0b29" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
+<div>
+### [SocialNerds](https://www.youtube.com/@SocialNerdsGR)
+
+<iframe class="custom-iframe" src="https://www.youtube.com/embed/videoseries?si=3qlDWETxqBRBFo8x&amp;list=PLuswtImoIwq9qyQ_a7liKsCyR1CU1s946" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
+<div>
+### [CodeGRow](https://www.youtube.com/@CodeGRow)
+
+<iframe class="custom-iframe" src="https://www.youtube.com/embed/videoseries?si=CoIJYrPRHZT9KKcl&amp;list=PLLazhr7ULbhq8dq-pxbJCZJU2tRVro519" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
+<div>
+### [Tech and Code In Greek](https://www.youtube.com/@TechandCodeInGreek)
+
+<iframe class="custom-iframe" src="https://www.youtube.com/embed/videoseries?si=D7FAyITMgfZ-tQ8b&amp;list=PLlae17WKTjHkwQgBG4EgIIZy2LC-FklWn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
+<div>
+### [Kostas Minaidis](https://www.youtube.com/@kostas_x)
+
+<iframe class="custom-iframe" src="https://www.youtube.com/embed/videoseries?si=jhEmKLssrFO0cGC0&amp;list=PLz6-xmVUqB-9q6IvzFVirZ55BcDPL4DpT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
+<div>
+### [codeatlas_gr](https://www.youtube.com/@codeatlas_gr)
+
+<iframe class="custom-iframe" src="https://www.youtube.com/embed/videoseries?si=3LA8IQVynn1IAN4A&amp;list=PL_ldFgvuSZ87UWMfC_UNPBBNnUbGn_XK7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
+</div>
