@@ -17,7 +17,6 @@
 
 Κανάλια στα Ελληνικά που ενισχύουν την εκμάθηση της JavaScript:
 
-
 <div id="youtube-channels">
 
 <div>
@@ -33,7 +32,7 @@
 </div>
 
 <div>
-### [CodeGRow](https://www.youtube.com/@CodeGRow)
+### [CodeGRow](https://www.youtube.com/@CodeGRrow)
 
 <iframe class="custom-iframe" src="https://www.youtube.com/embed/videoseries?si=CoIJYrPRHZT9KKcl&amp;list=PLLazhr7ULbhq8dq-pxbJCZJU2tRVro519" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
