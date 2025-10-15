@@ -49,10 +49,4 @@
 <iframe class="custom-iframe" src="https://www.youtube.com/embed/videoseries?si=jhEmKLssrFO0cGC0&amp;list=PLz6-xmVUqB-9q6IvzFVirZ55BcDPL4DpT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-<div>
-### [codeatlas_gr](https://www.youtube.com/@codeatlas_gr)
-
-<iframe class="custom-iframe" src="https://www.youtube.com/embed/videoseries?si=3LA8IQVynn1IAN4A&amp;list=PL_ldFgvuSZ87UWMfC_UNPBBNnUbGn_XK7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-</div>
-
 </div>
