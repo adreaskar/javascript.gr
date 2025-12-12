@@ -10,6 +10,8 @@ WORKDIR /opt/docusaurus
 
 # Stage 2: Production build mode.
 FROM base AS prod
+## Install git (needed for CI/CD).
+RUN apk add --no-cache git
 ## Copy only package files first
 COPY package.json package-lock.json ./
 ## Install dependencies.
@@ -17,7 +19,7 @@ RUN npm ci
 ## Copy over the source code.
 COPY . .
 
-# Initialize git repo (for CI/CD)
+# Initialize git repo (needed for CI/CD)
 RUN git config --global user.email "adreas@karabetian.gr" && \
     git config --global user.name "adreaskar" && \
     git init && \
