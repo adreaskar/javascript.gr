@@ -1,27 +1,151 @@
 name: Build and push Docker image to dockerhub
 
 on:
-    workflow_run:
-        workflows: ['Test Application Build']
-        types: [completed]
+    push:
+        branches: ['master']
 
 jobs:
-    build:
+    # First Job: Build a test image ===========================================
+    build-test-image:
+        name: Build an image for testing
         runs-on: ubuntu-latest
 
-        steps:
-            - name: Check out the repo
-              uses: actions/checkout@v4
+        permissions:
+            packages: write
 
-            - name: Login to dockerhub
+        steps:
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@v3
+
+            - name: Login to Docker Hub
               uses: docker/login-action@v3
               with:
                   username: ${{ secrets.DOCKERHUB_USERNAME }}
                   password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+            - name: Login to ghcr.io registry
+              uses: docker/login-action@v3
+              with:
+                  registry: ghcr.io
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Build and Push to GHCR
+              uses: docker/build-push-action@v6
+              with:
+                  push: true
+                  tags: ghcr.io/adreaskar/javascriptgr:${{ github.run_id }}
+                  target: test
+                  cache-from: type=gha
+                  cache-to: type=gha,mode=max
+                  platforms: linux/amd64
+
+    # Second Job: Unit Testing ================================================
+    unit-testing:
+        name: Unit tests in docker container
+        needs: [build-test-image]
+        runs-on: ubuntu-latest
+
+        permissions:
+            packages: read
+
+        steps:
+            - name: Login to ghcr.io registry
+              uses: docker/login-action@v3
+              with:
+                  registry: ghcr.io
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Unit Testing in container
+              run: |
+                  docker run --rm adreaskar/javascriptgr:${{ github.run_id }}-test echo "npm run build && test -d build && echo 'Build directory exists'"
+
+    # Third Job: San for image vunerabilities =================================
+    scan-image:
+        name: Scan image with Trivy
+        needs: [build-test-image]
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout git repo
+              uses: actions/checkout@v6
+
+            - name: Login to Docker Hub
+              uses: docker/login-action@v3
+              with:
+                  username: ${{ secrets.DOCKERHUB_USERNAME }}
+                  password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+            - name: Login to ghcr.io registry
+              uses: docker/login-action@v3
+              with:
+                  registry: ghcr.io
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Pull image to scan
+              run: docker pull ghcr.io/adreaskar/javascriptgr:"$GITHUB_RUN_ID"
+
+            - name: Run Trivy for all CVEs (non-blocking)
+              uses: aquasecurity/trivy-action@master
+              with:
+                  image-ref: adreaskar/javascriptgr:${{ github.run_id }}
+                  exit-code: 0
+                  format: table
+
+            - name: Run Trivy for HIGH,CRITICAL CVEs and report (blocking)
+              uses: aquasecurity/trivy-action@master
+              with:
+                  image-ref: adreaskar/javascriptgr:${{ github.run_id }}
+                  exit-code: 1
+                  ignore-unfixed: true
+                  vuln-type: 'os,library'
+                  severity: 'HIGH,CRITICAL'
+                  format: 'sarif'
+                  output: 'trivy-results.sarif'
+
+            - name: Upload Trivy scan results to GitHub Security tab
+              uses: github/codeql-action/upload-sarif@v3
+              if: always()
+              with:
+                  sarif_file: 'trivy-results.sarif'
+    # Final Job: Build final image ============================================
+    build-final-image:
+        name: Build final docker image
+        needs: [unit-testing, scan-image]
+        runs-on: ubuntu-latest
+
+        permissions:
+            packages: write # needed to push docker image to ghcr.io
+            pull-requests: write # needed to create and update comments in PRs
+
+        steps:
+            - name: Set up QEMU (multiplatform support)
+              uses: docker/setup-qemu-action@v3
+
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@v3
+
+            - name: Login to Docker Hub
+              uses: docker/login-action@v3
+              with:
+                  username: ${{ secrets.DOCKERHUB_USERNAME }}
+                  password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+            - name: Login to ghcr.io registry
+              uses: docker/login-action@v3
+              with:
+                  registry: ghcr.io
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Build and push to dockerhub
               uses: docker/build-push-action@v5
               with:
                   context: .
                   push: true
-                  tags: adreaskar/javascriptgr:latest
+                  tags: adreaskar/javascriptgr:${{ github.run_id }}
+                  cache-from: type=gha
+                  cache-to: type=gha,mode=max
+                  platforms: linux/amd64,linux/arm64,linux/arm/v7
