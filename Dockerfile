@@ -1,6 +1,6 @@
 # Stage 1: Base image.
 ## Start with a base image containing NodeJS so we can build Docusaurus.
-FROM node:lts AS base
+FROM node:lts-alpine AS base
 ## Disable colour output from yarn to make logs easier to read.
 ENV FORCE_COLOR=0
 ## Enable corepack.
@@ -18,10 +18,10 @@ RUN npm ci
 COPY . .
 
 # Initialize git repo (for CI/CD)
-RUN git config --global user.email "adreas@karabetian.gr" && \
-    git config --global user.name "adreaskar" && \
-    git init && \
-    git commit --allow-empty -m "Trigger build"
+# RUN git config --global user.email "adreas@karabetian.gr" && \
+#     git config --global user.name "adreaskar" && \
+#     git init && \
+#     git commit --allow-empty -m "Trigger build"
 
 ## Build the static site.
 RUN npm run build
