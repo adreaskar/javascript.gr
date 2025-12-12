@@ -101,7 +101,10 @@ jobs:
               with:
                   image-ref: ghcr.io/adreaskar/javascriptgr:${{ github.run_id }}
                   exit-code: 0
-                  format: table
+                  format: 'sarif'
+                  output: 'trivy-results.sarif'
+                  ignore-unfixed: true
+                  vuln-type: 'os,library'
 
             # - name: Run Trivy for HIGH,CRITICAL CVEs and report (blocking)
             #   uses: aquasecurity/trivy-action@master
@@ -114,11 +117,11 @@ jobs:
             #       format: 'sarif'
             #       output: 'trivy-results.sarif'
 
-            # - name: Upload Trivy scan results to GitHub Security tab
-            #   uses: github/codeql-action/upload-sarif@v3
-            #   if: always()
-            #   with:
-            #       sarif_file: 'trivy-results.sarif'
+            - name: Upload Trivy scan results to GitHub Security tab
+              uses: github/codeql-action/upload-sarif@v3
+              if: always()
+              with:
+                  sarif_file: 'trivy-results.sarif'
 
     # Final Job: Build final image ============================================
     build-final-image:
