@@ -72,9 +72,9 @@ jobs:
         runs-on: ubuntu-latest
 
         permissions:
-        contents: read # for actions/checkout to fetch code
-        packages: read # needed to pull docker image to ghcr.io
-        security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
+            contents: read # for actions/checkout to fetch code
+            packages: read # needed to pull docker image to ghcr.io
+            security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
 
         steps:
             - name: Checkout git repo
