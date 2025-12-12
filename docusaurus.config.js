@@ -82,6 +82,8 @@ const config = {
             ({
                 docs: {
                     sidebarPath: './sidebars.js',
+                    showLastUpdateAuthor: false,
+                    showLastUpdateTime: false,
                     // Remove this to remove the "edit this page" links.
                     // editUrl:
                     //     'https://github.com/adreaskar/javascript-handbook/',
