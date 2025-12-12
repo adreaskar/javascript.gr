@@ -131,6 +131,11 @@ jobs:
             pull-requests: write # needed to create and update comments in PRs
 
         steps:
+            - name: Checkout git repo
+              uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0
+
             - name: Set up QEMU (multiplatform support)
               uses: docker/setup-qemu-action@v3
 
@@ -158,4 +163,4 @@ jobs:
                   tags: adreaskar/javascriptgr:latest
                   cache-from: type=gha
                   cache-to: type=gha,mode=max
-                  platforms: linux/amd64,linux/arm64,linux/arm/v7
+                  platforms: linux/amd64,linux/arm64
