@@ -63,13 +63,18 @@ jobs:
 
             - name: Unit Testing in container
               run: |
-                  docker run --rm adreaskar/javascriptgr:${{ github.run_id }}-test echo "npm run build && test -d build && echo 'Build directory exists'"
+                  docker run --rm adreaskar/javascriptgr:${{ github.run_id }} echo "npm run build && test -d build && echo 'Build directory exists'"
 
     # Third Job: San for image vunerabilities =================================
     scan-image:
         name: Scan image with Trivy
         needs: [build-test-image]
         runs-on: ubuntu-latest
+
+        permissions:
+        contents: read # for actions/checkout to fetch code
+        packages: read # needed to pull docker image to ghcr.io
+        security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
 
         steps:
             - name: Checkout git repo
@@ -94,14 +99,14 @@ jobs:
             - name: Run Trivy for all CVEs (non-blocking)
               uses: aquasecurity/trivy-action@master
               with:
-                  image-ref: adreaskar/javascriptgr:${{ github.run_id }}
+                  image-ref: ghcr.io/adreaskar/javascriptgr:${{ github.run_id }}
                   exit-code: 0
                   format: table
 
             - name: Run Trivy for HIGH,CRITICAL CVEs and report (blocking)
               uses: aquasecurity/trivy-action@master
               with:
-                  image-ref: adreaskar/javascriptgr:${{ github.run_id }}
+                  image-ref: ghcr.io/adreaskar/javascriptgr:${{ github.run_id }}
                   exit-code: 1
                   ignore-unfixed: true
                   vuln-type: 'os,library'
