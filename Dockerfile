@@ -18,10 +18,10 @@ RUN npm ci
 COPY . .
 
 # Initialize git repo (for CI/CD)
-# RUN git config --global user.email "adreas@karabetian.gr" && \
-#     git config --global user.name "adreaskar" && \
-#     git init && \
-#     git commit --allow-empty -m "Trigger build"
+RUN git config --global user.email "adreas@karabetian.gr" && \
+    git config --global user.name "adreaskar" && \
+    git init && \
+    git commit --allow-empty -m "Trigger build"
 
 ## Build the static site.
 RUN npm run build
