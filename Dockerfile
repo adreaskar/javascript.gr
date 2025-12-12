@@ -10,12 +10,13 @@ WORKDIR /opt/docusaurus
 
 # Stage 2: Production build mode.
 FROM base AS prod
-## Set the working directory to `/opt/docusaurus`.
-WORKDIR /opt/docusaurus
-## Copy over the source code.
-COPY . /opt/docusaurus/
-## Install dependencies with `--immutable` to ensure reproducibility.
+## Copy only package files first
+COPY package.json package-lock.json ./
+## Install dependencies.
 RUN npm ci
+## Copy over the source code.
+COPY . .
+
 ## Build the static site.
 RUN npm run build
 
